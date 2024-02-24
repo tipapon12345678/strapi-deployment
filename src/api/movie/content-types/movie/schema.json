@@ -4,7 +4,8 @@
   "info": {
     "singularName": "movie",
     "pluralName": "movies",
-    "displayName": "Movie"
+    "displayName": "Movie",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,90 @@
       "type": "string"
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Year": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "Rating": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "movies"
+    },
+    "types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::type.type",
+      "mappedBy": "movies"
+    },
+    "Collection": {
+      "type": "enumeration",
+      "enum": [
+        "movies",
+        "series"
+      ],
+      "required": true
+    },
+    "quality": {
+      "type": "enumeration",
+      "enum": [
+        "HD",
+        "ZM"
+      ]
+    },
+    "Sound": {
+      "type": "enumeration",
+      "enum": [
+        "Thai",
+        "Sound Track"
+      ],
+      "required": true
+    },
+    "Youtube": {
+      "type": "string",
+      "required": false
+    },
+    "ep": {
+      "displayName": "Uplond",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.uplond"
+    },
+    "movies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::movie.movie",
+      "inversedBy": "Recommended"
+    },
+    "Recommended": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::movie.movie",
+      "inversedBy": "movies"
+    },
+    "Poppulate": {
+      "type": "boolean"
+    },
+    "ImageBg": {
       "allowedTypes": [
         "images",
         "files",
@@ -22,7 +107,8 @@
         "audios"
       ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true
     }
   }
 }
